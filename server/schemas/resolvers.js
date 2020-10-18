@@ -38,6 +38,7 @@ const resolvers = {
             }
 
             const token = signToken(user);
+            console.log(token, user)
             return { token, user };
         },
         saveBook: async (parent, args, context) => {

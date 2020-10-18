@@ -1,4 +1,4 @@
-/*import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -25,45 +25,38 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_BOOK = gql`
-  mutation saveBook($id: ID!, $authors:) {
-    saveBook(friendId: $id) {
-      _id
-      username
-      friendCount
-      friends {
-        _id
-        username
-      }
-    }
+    mutation saveBook {
+        saveBook(input: { 
+            bookAuthorsArray:["alexo"],
+            title:"alextitle",
+            description:"alexdescr",
+            bookId:"1234",
+            image:"image", 
+            link:"linky"
+        }){
+            user{
+                username
+                email
+                bookCount
+                savedBooks {
+                    bookId
+                }
+            }
+        }
   }
 `;
 
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
-      _id
-      thoughtText
-      createdAt
-      username
-      reactionCount
-      reactions {
-        _id
-      }
+export const REMOVE_BOOK = gql`
+  mutation removeBook($bookId: String!) {
+    removeBook(bookId: $bookId) {
+        user{
+            username
+            email
+            bookCount
+            savedBooks  {
+                bookId
+            }
+        }
     }
   }
 `;
-
-export const ADD_REACTION = gql`
-  mutation addReaction($thoughtId: ID!, $reactionBody: String!) {
-    addReaction(thoughtId: $thoughtId, reactionBody: $reactionBody) {
-      _id
-      reactionCount
-      reactions {
-        _id
-        reactionBody
-        createdAt
-        username
-      }
-    }
-  }
-`;*/
