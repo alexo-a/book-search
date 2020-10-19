@@ -4,12 +4,11 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async (parent, args, context) => {
+        me: async (parent, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    //.populate('thoughts')
-                    //.populate('friends');
+                    .populate('savedBooks')
 
                 return userData;
             }
@@ -25,7 +24,7 @@ const resolvers = {
             return { token, user };
         },
         login: async (parent, { email, password }) => {
-            const user = await User.findOne({ email });
+            const user = await User.findOne({ email: email });
 
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials');
@@ -61,7 +60,8 @@ const resolvers = {
                     { _id: context.user._id },
                     { $pull: { savedBooks: { bookId: removedBookId} } },
                     { new: true }
-                )//.populate('friends');
+                )
+                .populate('savedBooks');
 
                 return updatedUser;
             }
