@@ -7,9 +7,9 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = async () => {
-    //const [userData, setUserData] = useState({});
-    let userData
-    const [getMe, { error }] = useQuery(GET_ME);
+    const [userData, setUserData] = useState({});
+    //let userData
+    const [getMe] = useQuery(GET_ME);
     const [deleteBook] = useMutation(REMOVE_BOOK);
     // use this to determine if `useEffect()` hook needs to run again
     const userDataLength = Object.keys(userData).length;
@@ -60,8 +60,8 @@ const SavedBooks = async () => {
                 throw new Error('something went wrong!');
             }
 
-            const updatedUser = await response.json();
-            setUserData(updatedUser);*/
+            const updatedUser = await response.json();*/
+            setUserData(userResponse);
             // upon success, remove book's id from localStorage
             removeBookId(bookId);
         } catch (err) {
