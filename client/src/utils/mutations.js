@@ -27,12 +27,12 @@ export const ADD_USER = gql`
 export const SAVE_BOOK = gql`
     mutation saveBook {
         saveBook(input: { 
-            bookAuthorsArray:["alexo"],
-            title:"alextitle",
-            description:"alexdescr",
-            bookId:"1234",
-            image:"image", 
-            link:"linky"
+            bookAuthorsArray:$bookAuthorsArray,
+            title:$title,
+            description:$description,
+            bookId:$bookId,
+            image:$image, 
+            link:$link
         }){
             user{
                 username
